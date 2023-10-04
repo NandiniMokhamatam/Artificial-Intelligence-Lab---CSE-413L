@@ -1,0 +1,45 @@
+def dfs(graph, node, visited, parent):
+    visited[node] = True
+    for neighbor in graph[node]:
+        if not visited[neighbor]:
+            if dfs(graph, neighbor, visited, node):
+                return True
+        elif neighbor != parent:
+            return True
+    return False
+
+def has_cycle(graph):
+    visited = {node: False for node in graph}
+    for node in graph:
+        if not visited[node]:
+            if dfs(graph, node, visited, parent=None):
+                return True
+    return False
+
+# Example undirected graph with a cycle
+graph_with_cycle = {
+    1: [2, 3],
+    2: [1, 4],
+    3: [1, 5],
+    4: [2, 6],
+    5: [3],
+    6: [4]
+}
+
+# Example undirected graph without a cycle,
+graph_without_cycle = {
+    1: [2, 3],
+    2: [1, 4],
+    3: [1, 5],
+    4: [2],
+    5: [3]
+}
+if has_cycle(graph_with_cycle):
+    print("The graph with a cycle contains a cycle.")
+else:
+    print("The graph with a cycle does not contain a cycle.")
+
+if has_cycle(graph_without_cycle):
+    print("The graph without a cycle contains a cycle.")
+else:
+    print("The graph without a cycle does not contain a cycle.")

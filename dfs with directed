@@ -1,0 +1,49 @@
+def dfs(graph, node, visited, recursion_stack):
+    visited[node] = True
+    recursion_stack.add(node)
+    
+    for neighbor in graph[node]:
+        if not visited[neighbor]:
+            if dfs(graph, neighbor, visited, recursion_stack):
+                return True
+        elif neighbor in recursion_stack:
+            return True
+    
+    recursion_stack.remove(node)
+    return False
+
+def has_cycle(graph):
+    visited = {node: False for node in graph}
+    recursion_stack = set()
+    
+    for node in graph:
+        if not visited[node]:
+            if dfs(graph, node, visited, recursion_stack):
+                return True
+    
+    return False
+
+# Example directed graph with a cycle,
+graph_with_cycle = {
+    1: [2],
+    2: [3],
+    3: [1, 4],
+    4: []
+}
+
+# Example directed graph without a cycle
+graph_without_cycle = {
+    1: [2],
+    2: [3],
+    3: [4],
+    4: []
+}
+if has_cycle(graph_with_cycle):
+    print("The graph with a cycle contains a cycle.")
+else:
+    print("The graph with a cycle does not contain a cycle.")
+
+if has_cycle(graph_without_cycle):
+    print("The graph without a cycle contains a cycle.")
+else:
+    print("The graph without a cycle does not contain a cycle.")

@@ -1,0 +1,70 @@
+class Treenode:
+    def __init__(self,val=0,left=None,right=None):
+        self.val=val
+        self.left=left
+        self.right=right
+    def isMirror(root1,root2):
+        if root1 is None and root2 is None:
+            return true
+        if root1 is None or root2 is None:
+            return False
+        return (root.val==root2.val) and isMirror(root1.left,root2.right) and isMirror(root1.right,root2.left)
+    def isSymmetric(root):
+        if root is None:
+            return True 
+        return isMirror(root.left,root.right)
+    root=TreeNode(1) 
+    root.left=TreeNode(2)
+    root.right=TreeNode(2)
+    root.left.left=TreeNode(3)
+    root.left.right=TreeNode(4)
+    root.right.left=TreeNode(4)
+    root.right.right=TreeNode(3)
+    print(isSymmetric(root))
+
+
+ 
+
+
+ 
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+   
+
+
+
+
+
+ 
+
+
+
+ 
+
+
+
+
+
+ 
+ 
+ 
+
+ 
+
+
+ 
+
+
+
+

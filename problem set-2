@@ -1,0 +1,37 @@
+def custom_edge_direction(num_vertices, num_edges, edge_list):
+
+ in_degrees = [0] * num_vertices
+ edge_directions = [0] * num_edges
+ 
+ for u, v in edge_list:
+ in_degrees[u - 1] += 1
+ in_degrees[v - 1] += 1
+ 
+ for i in range(num_edges):
+ u, v = edge_list[i]
+ if in_degrees[u - 1] % 2 == 1:
+ edge_directions[i] = 1
+ in_degrees[u - 1] -= 1
+ in_degrees[v - 1] += 1
+ else:
+ edge_directions[i] = 0
+ in_degrees[v - 1] -= 1
+ in_degrees[u - 1] += 1
+ 
+ if sum(in_degrees) % 2 == 0:
+ return edge_directions
+ else:
+ return [-1]
+# Input
+vertices = int(input())
+edges_count = int(input())
+edges = []
+for _ in range(edges_count):
+ u, v = map(int, input().split())
+ edges.append((u, v))
+# Calculate and display result
+result = custom_edge_direction(vertices, edges_count, edges)
+if result[0] == -1:
+ print(-1)
+else:
+ print("Output:", " ".join(map(str, result)))
